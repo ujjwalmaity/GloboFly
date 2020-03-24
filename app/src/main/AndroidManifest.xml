@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="dev.ujjwal.globofly">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,7 +11,36 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+
+        <activity
+            android:name="dev.ujjwal.globofly.activities.DestinationDetailActivity"
+            android:label="Destination Detail"
+            android:parentActivityName="dev.ujjwal.globofly.activities.DestinationListActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="dev.ujjwal.globofly.activities.DestinationListActivity" />
+        </activity>
+
+        <activity
+            android:name="dev.ujjwal.globofly.activities.DestinationCreateActivity"
+            android:label="New Destination"
+            android:parentActivityName="dev.ujjwal.globofly.activities.DestinationListActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="dev.ujjwal.globofly.activities.DestinationListActivity" />
+        </activity>
+
+        <activity
+            android:name="dev.ujjwal.globofly.activities.DestinationListActivity"
+            android:label="Destination List"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name="dev.ujjwal.globofly.activities.WelcomeActivity"
+            android:label="GloboFly"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
