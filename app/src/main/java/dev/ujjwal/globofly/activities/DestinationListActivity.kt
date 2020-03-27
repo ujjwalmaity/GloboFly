@@ -40,8 +40,8 @@ class DestinationListActivity : AppCompatActivity() {
     private fun loadDestinations() {
         val destinationService = ServiceBuilder.buildService(DestinationService::class.java)
 
-        val requestCall = destinationService.getDestinationList(null)
-        //val requestCall = destinationService.getDestinationList("India")
+        val requestCall = destinationService.getDestinationList(null,null)
+        //val requestCall = destinationService.getDestinationList("India", 1)
 
         requestCall.enqueue(object : Callback<List<Destination>> {
 
