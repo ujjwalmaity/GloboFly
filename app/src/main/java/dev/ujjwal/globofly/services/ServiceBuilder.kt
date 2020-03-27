@@ -1,6 +1,7 @@
 package dev.ujjwal.globofly.services
 
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -8,8 +9,11 @@ object ServiceBuilder {
 
     private const val URL = "http://192.168.43.222:9000/"
 
+    // Create logging - In Logcat use Debug filter 'OkHttp'
+    private val logging = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+
     // Create OkHttp Client
-    private val okHttp = OkHttpClient.Builder()
+    private val okHttp = OkHttpClient.Builder().addInterceptor(logging)
 
     // Create Retrofit Builder
     private val builder = Retrofit.Builder()
