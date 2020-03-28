@@ -49,7 +49,7 @@ class DestinationListActivity : AppCompatActivity() {
         //val requestCall = destinationService.getDestinationList("India")
         //val requestCall = destinationService.getDestinationList(null, null)
         //val requestCall = destinationService.getDestinationList("India", 1)
-        val requestCall = destinationService.getDestinationList(filter)
+        val requestCall = destinationService.getDestinationList(filter, "EN")
 
         requestCall.enqueue(object : Callback<List<Destination>> {
 
