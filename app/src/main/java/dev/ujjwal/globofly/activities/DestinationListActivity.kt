@@ -74,5 +74,9 @@ class DestinationListActivity : AppCompatActivity() {
                 }
             }
         })
+
+        // Used to cancel download
+        //requestCall.cancel()
+        //requestCall.isCanceled
     }
 }
