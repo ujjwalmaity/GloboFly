@@ -1,9 +1,13 @@
 package dev.ujjwal.globofly.services
 
+import android.os.Build
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.*
 
 object ServiceBuilder {
 
@@ -12,8 +16,24 @@ object ServiceBuilder {
     // Create logging - In Logcat use Debug filter 'OkHttp'
     private val logging = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
 
+    // Create a custom interceptor to apply headers application wide
+    private val headerInterceptor = object : Interceptor {
+        override fun intercept(chain: Interceptor.Chain): Response {
+            var request = chain.request()
+
+            request = request.newBuilder()
+                .addHeader("x-device-type", Build.DEVICE)
+                .addHeader("Accept-Language", Locale.getDefault().language)
+                .build()
+
+            return chain.proceed(request)
+        }
+    }
+
     // Create OkHttp Client
-    private val okHttp = OkHttpClient.Builder().addInterceptor(logging)
+    private val okHttp = OkHttpClient.Builder()
+        .addInterceptor(headerInterceptor)
+        .addInterceptor(logging)
 
     // Create Retrofit Builder
     private val builder = Retrofit.Builder()

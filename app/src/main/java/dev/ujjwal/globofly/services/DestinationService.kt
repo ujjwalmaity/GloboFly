@@ -8,15 +8,15 @@ interface DestinationService {
 
     // http://192.168.43.222:9000/destination
     // http://192.168.43.222:9000/destination?country=India&count=1
-    @Headers("x-device-type: Android", "x-foo: bar")
+    // x-device-type: A7010a48
+    // Accept-Language: en
+    //@Headers("x-device-type: Android", "x-foo: bar")
     @GET("destination")
     //fun getDestinationList(): Call<List<Destination>>
     //fun getDestinationList(@Query("country") country: String?): Call<List<Destination>>
     //fun getDestinationList(@Query("country") country: String?, @Query("count") count: Int?): Call<List<Destination>>
-    fun getDestinationList(
-        @QueryMap filter: HashMap<String, String>,
-        @Header("Accept-Language") language: String
-    ): Call<List<Destination>>
+    fun getDestinationList(@QueryMap filter: HashMap<String, String>): Call<List<Destination>>
+    //fun getDestinationList(@QueryMap filter: HashMap<String, String>, @Header("Accept-Language") language: String): Call<List<Destination>>
 
     // http://192.168.43.222:9000/destination/47
     @GET("destination/{id}")
