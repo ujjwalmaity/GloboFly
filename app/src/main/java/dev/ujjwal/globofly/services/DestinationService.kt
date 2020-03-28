@@ -35,4 +35,8 @@ interface DestinationService {
         @Field("description") desc: String,
         @Field("country") country: String
     ): Call<Destination>
+
+    // http://192.168.43.222:9000/destination/6
+    @DELETE("destination/{id}")
+    fun deleteDestination(@Path("id") id: Int): Call<Unit>
 }
