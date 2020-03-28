@@ -72,15 +72,25 @@ class DestinationDetailActivity : AppCompatActivity() {
             val description = et_description.text.toString()
             val country = et_country.text.toString()
 
-            // To be replaced by retrofit code
-            val destination = Destination()
-            destination.id = id
-            destination.city = city
-            destination.description = description
-            destination.country = country
+            val destinationService = ServiceBuilder.buildService(DestinationService::class.java)
 
-            SampleData.updateDestination(destination)
-            finish()
+            val requestCall = destinationService.updateDestination(id, city, description, country)
+
+            requestCall.enqueue(object : Callback<Destination> {
+                override fun onFailure(call: Call<Destination>, t: Throwable) {
+                    Toast.makeText(this@DestinationDetailActivity, "Error occurred $t", Toast.LENGTH_SHORT).show()
+                }
+
+                override fun onResponse(call: Call<Destination>, response: Response<Destination>) {
+                    if (response.isSuccessful) {
+                        val updateDestination = response.body()
+                        finish()
+                        Toast.makeText(this@DestinationDetailActivity, "Item updated successfully", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(this@DestinationDetailActivity, "Failed to retrieve items", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            })
         }
     }
 

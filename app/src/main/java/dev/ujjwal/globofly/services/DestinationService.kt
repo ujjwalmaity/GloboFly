@@ -18,6 +18,21 @@ interface DestinationService {
     @GET("destination/{id}")
     fun getDestination(@Path("id") id: Int): Call<Destination>
 
+    // http://192.168.43.222:9000/destination
+    // Content-Type: application/json; charset=UTF-8
+    // {"city":"New city","country":"New country","description":"Some new description","id":0}
     @POST("destination")
     fun addDestination(@Body newDestination: Destination): Call<Destination>
+
+    // http://192.168.43.222:9000/destination/4
+    // Content-Type: application/x-www-form-urlencoded
+    // city=Old%20Delhi&description=Nice%20city&country=India
+    @FormUrlEncoded
+    @PUT("destination/{id}")
+    fun updateDestination(
+        @Path("id") id: Int,
+        @Field("city") city: String,
+        @Field("description") desc: String,
+        @Field("country") country: String
+    ): Call<Destination>
 }
